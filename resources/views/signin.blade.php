@@ -53,29 +53,27 @@ License: For each use you must have a valid license purchased only from above li
 						<div class="w-lg-500px p-10">
 							<!--begin::Form-->
 							<form class="form w-100"  action="/signin" method="POST">
-                            @csrf
+							@csrf
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
-
-
-                                    <h1 class="text-dark display-4 fw-bolder mb-3">SchoolLink</h1>
+									<a href="/" class="text-dark display-4 fw-bolder mb-3">SchoolLink</a>
 									<h1 class="text-dark display-8 mb-3">Sign In</h1>
 									<!--end::Title-->
 									<!--begin::Subtitle-->
-                                    <!--begin::Social Logos-->
-                                    <div class="d-flex justify-content-center">
-                                        <a href="#" class="mx-2">
-                                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/icons/facebook.svg" alt="Facebook" width="24" height="24">
-                                        </a>
-                                        <a href="#" class="mx-2">
-                                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/icons/twitter.svg" alt="Twitter" width="24" height="24">
-                                        </a>
-                                        <a href="#" class="mx-2">
-                                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
-                                        </a>
-                                    </div>
-                                    <!--end::Social Logos-->
+									<!--begin::Social Logos-->
+									<div class="d-flex justify-content-center">
+										<a href="#" class="mx-2">
+											<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/icons/facebook.svg" alt="Facebook" width="24" height="24">
+										</a>
+										<a href="#" class="mx-2">
+											<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/icons/twitter.svg" alt="Twitter" width="24" height="24">
+										</a>
+										<a href="#" class="mx-2">
+											<img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+										</a>
+									</div>
+									<!--end::Social Logos-->
 									<!--end::Subtitle=-->
 								</div>
 								<!--begin::Heading-->
@@ -83,22 +81,22 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="separator separator-content my-14">
 									<span class="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
 								</div>
-                                <!--begin::Alert-->
-                                @if(session('success'))
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ session('success') }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                @endif
-                                @if(session('error'))
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        {{ session('error') }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                @endif
+								<!--begin::Alert-->
+								@if(session('success'))
+									<div class="alert alert-success alert-dismissible fade show" role="alert">
+										{{ session('success') }}
+										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+									</div>
+								@endif
+								@if(session('error'))
+									<div class="alert alert-danger alert-dismissible fade show" role="alert">
+										{{ session('error') }}
+										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+									</div>
+								@endif
 
-                               
-                                <!--end::Alert-->
+							   
+								<!--end::Alert-->
 								<!--end::Separator-->
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
@@ -162,14 +160,14 @@ License: For each use you must have a valid license purchased only from above li
 					<!--begin::Content-->
 					<div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
 						<!--begin::Logo-->
-						<h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7">SchoolLink</h1>
+						<a href="/" class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7">SchoolLink</a>
 						<!--begin::Title-->
-                        <h1 class="d-none d-lg-block text-white fs-2 fw-bolder text-center mb-7">Fast, Efficient and Productive</h1>
+						<h1 class="d-none d-lg-block text-white fs-2 fw-bolder text-center mb-7">Fast, Efficient and Productive</h1>
 						<!--end::Title-->
 						<!--begin::Text-->
-                        <div class="d-none d-lg-block text-white fs-base text-center">
-                            <p>SchoolLink is a comprehensive platform that allows users to search for and book schools. Our mission is to simplify the process of finding the right educational institution by providing detailed information and user reviews. Join us and discover the best schools for your needs.</p>
-                        </div>
+						<div class="d-none d-lg-block text-white fs-base text-center">
+							<p>SchoolLink is a comprehensive platform that allows users to search for and book schools. Our mission is to simplify the process of finding the right educational institution by providing detailed information and user reviews. Join us and discover the best schools for your needs.</p>
+						</div>
 						<!--end::Text-->
 					</div>
 					<!--end::Content-->

@@ -4,6 +4,17 @@
 
 <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
     <!--begin::Header-->
+	@if(session('success'))
+		<div class="alert alert-success">
+			{{ session('success') }}
+		</div>
+	@endif
+
+	@if(session('error'))
+		<div class="alert alert-danger">
+			{{ session('error') }}
+		</div>
+	@endif
     <div id="kt_header" class="header align-items-stretch">
         <!--begin::Brand-->
         <div class="header-brand">
@@ -486,7 +497,7 @@
 													<div class="d-flex align-items-center flex-row-fluid flex-wrap">
 														<!--begin:Author-->
 														<div class="flex-grow-1 me-2">
-															<a href="../../demo8/dist/pages/user-profile/overview.html" class="text-gray-800 text-hover-primary fs-6 fw-bold">View Registration Document</a>
+															<a href="/admin/viewdocument/{{$school->id}}" class="text-gray-800 text-hover-primary fs-6 fw-bold">View Registration Document</a>
 															<span class="text-muted fw-semibold d-block fs-7">View and Verify Registration Document
                                                             </span>
 														</div>
@@ -612,8 +623,8 @@
                                                     <div class="d-flex align-items-center flex-row-fluid flex-wrap">
                                                         <!--begin:Author-->
                                                         <div class="flex-grow-1 me-2">
-                                                            <a href="" class="btn btn-sm btn-warning me-2">Edit School</a>
-                                                            <form action="" method="POST" onsubmit="return confirm('Are you sure you want to delete this school?');" style="display:inline-block;">
+                                                            <a href="/admin/school/edit/{{$school->id}}" class="btn btn-sm btn-warning me-2">Edit School</a>
+                                                            <form action="/admin/school/delete/{{$school->id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this school?');" style="display:inline-block;">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-sm btn-danger">Delete School</button>

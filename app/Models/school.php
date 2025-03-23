@@ -16,4 +16,8 @@ public function users()
 {
     return $this->hasManyThrough(User::class, AssignSchoolToUser::class, 'school_id', 'id', 'id', 'user_id');
 }
+public function alumnus()
+{
+    return $this->hasMany(Alumnus::class);
+}
 }

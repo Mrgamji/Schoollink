@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\KudiSMSCallbackController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
-use App\Http\Controllers\SMSController;
 use App\Http\Controllers\User;
+use App\Http\Middleware\Auth;
+use App\Models\Alumni;
 use App\Models\category;
 use App\Models\school;
 use App\Models\SchoolImages;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\Alumnus;
+use App\Models\competition;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 Route::get('/', function () {
     $data['categories']= category::get();
@@ -26,21 +30,46 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/admin', function () {
+    return view('admin.login');
+})->name('admin.login');
+
+Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
+Route::get('/admin/viewdocument/{id}', function ($id) {
+    $data['school'] = school::find($id);
+    $data['school_images'] = SchoolImages::where('school_id', $id)->get();
+    return view('admin.verify', $data);
+})->middleware('admin')->name('admin.verifydocument');
+
+Route::get('/admin/school/edit/{id}', function ($id) {
+    $data['school'] = school::find($id);
+    return view('admin.edit', $data);
+})->middleware('admin')->name('admin.editschool');
+
+Route::get('/user/school/edit/{id}', function ($id) {
+    $data['school'] = school::find($id);
+    return view('editschool', $data);
+})->middleware('user')->name('user.editschool');
+
+Route::put('/admin/school/update/{id}', [SchoolController::class, 'update'])->middleware('admin')->name('admin.updateschool');
+
+Route::delete('/admin/school/delete/{id}', [SchoolController::class, 'destroy'])->middleware('admin')->name('admin.deleteschool');
+
 Route::get('/admin/schools', function () {
-    $data['schools']=school::get();
-    $data['verified']=school::where('status', 'verified')->get();
-    $data['pending']=school::where('status', 'pending')->get();
-    $data['rejected']=school::where('status', 'rejected')->get();
+    $data['schools'] = school::get();
+    $data['verified'] = school::where('status', 'verified')->get();
+    $data['pending'] = school::where('status', 'pending')->get();
+    $data['rejected'] = school::where('status', 'rejected')->get();
     return view('admin.schools', $data);
-})->name('admin.schools');
+})->middleware('admin')->name('admin.schools');
 
 Route::get('/admin/school/{id}', function ($id) {
-    $data['school'] = school::find($id);
-    $data['school_images']= SchoolImages::where('school_id', $id)->get();
-    return view('admin.viewschool', $data);
+    $school = school::findOrFail($id); // Returns 404 if not found
+    $school_images = SchoolImages::where('school_id', $id)->get();
+
+    return view('admin.viewschool', compact('school', 'school_images'));
 })->name('admin.viewschool');
 
 
@@ -73,7 +102,34 @@ Route::get('/admin/school/rejected/{id}', function ($id) {
 })->name('admin.setrejected');
 
 
+Route::get('/addalumnus', function () {
+    return view('addalumnus');
 
+})->name('addalumnus');
+
+    Route::post('/createalumnus', function (Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'current_role' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $imagePath = $request->file('image')->store('alumni_images', 'public');
+
+       $school = school::where('email', FacadesAuth::user()->email)->first();
+        Alumni::create([
+            'name' => $request->name,
+            'image' => $imagePath,
+            'current_role' => $request->current_role,
+            'contact' => $request->phone,
+            'email' => $request->email,
+            'school_id' => $school->id,
+        ]);
+        
+        return redirect()->back()->with('success', 'Alumnus added successfully');
+    })->name('createalumnus');
 
 Route::get('/createcat', function () {
     $data=['private', 'public', 'islamiyya', 'tsangaya', 'day', 'boarding'];
@@ -91,8 +147,36 @@ Route::get('/createcat', function () {
     dd('done');
 })->name('catcreate');
 
+Route::get('/addachievement', function () {
+    return view('addachievement');
+})->name('addachievement');
+Route::post('/createachievement', function (Request $request) {
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'organizer' => 'required|string|max:255',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'position' => 'required|string|max:255',
+        'date' => 'required|date',
+    ]);
+
+    $imagePath = $request->file('image')->store('achievements', 'public');
+
+    $school = school::where('email', FacadesAuth::user()->email)->first();
+    competition::create([
+        'title' => $request->title,
+        'organizer' => $request->organizer,
+        'image' => $imagePath,
+        'position' => $request->position,
+        'date' => $request->date,
+        'school_id' => $school->id,
+    ]);
+
+    return redirect()->back()->with('success', 'Achievement added successfully');
+})->name('createachievement');
+
 Route::post('/signup', [SchoolController::class, 'store'])->name('school.store');
-Route::post('/signin', [User::class, 'authenticate'])->name('user.authenticate');
+Route::post('/signin', [User::class, 'userAuthenticate'])->name('user.authenticate');
+Route::post('/admin/signin', [User::class, 'adminAuthenticate'])->name('admin.authenticate');
 Route::get('/logout', [User::class, 'logout'])->name('user.logout');
 Route::get('/search', [SchoolController::class, 'search'])->name('school.search');
 

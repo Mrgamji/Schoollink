@@ -121,8 +121,8 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Icon-->
 										<!--begin::Label-->
 										<div class="stepper-label">
-											<h3 class="stepper-title fs-2">Registration Details</h3>
-											<div class="stepper-desc fw-normal">Verify the authenticity of your school...</div>
+											<h3 class="stepper-title fs-2">School Details</h3>
+											<div class="stepper-desc fw-normal">More Details about your school</div>
 										</div>
 										<!--end::Label-->
 									</div>
@@ -515,10 +515,10 @@ License: For each use you must have a valid license purchased only from above li
 										<!--begin::Heading-->
 										<div class="pb-10 pb-lg-12">
 											<!--begin::Title-->
-											<h2 class="fw-bold text-dark">Registration Details</h2>
+											<h2 class="fw-bold text-dark">School Details</h2>
 											<!--end::Title-->
 											<!--begin::Notice-->
-											<div class="text-muted fw-semibold fs-6">Verify the authenticity of your school.</div>
+											<div class="text-muted fw-semibold fs-6">More details about your school</div>
 											<!--end::Notice-->
 										</div>
 										<!--end::Heading-->
@@ -551,6 +551,117 @@ License: For each use you must have a valid license purchased only from above li
 											@error('registration_date')
 											<div class="invalid-feedback">{{ $message }}</div>
 											@enderror
+										</div>
+										<!--end::Input group-->
+
+										<!--begin::Input group-->
+										<div class="row mb-10">
+											<div class="col-md-6 fv-row">
+												<!--begin::Label-->
+												<label class="form-label required">Opening Hours</label>
+												<!--end::Label-->
+												<!--begin::Input-->
+												<input type="time" class="form-control form-control-lg form-control-solid" name="opening_hours" />
+												<!--end::Input-->
+												@error('opening_hours')
+												<div class="invalid-feedback">{{ $message }}</div>
+												@enderror
+											</div>
+											<div class="col-md-6 fv-row">
+												<!--begin::Label-->
+												<label class="form-label required">Closing Hours</label>
+												<!--end::Label-->
+												<!--begin::Input-->
+												<input type="time" class="form-control form-control-lg form-control-solid" name="closing_hours" />
+												<!--end::Input-->
+												@error('closing_hours')
+												<div class="invalid-feedback">{{ $message }}</div>
+												@enderror
+											</div>
+										</div>
+										<!--end::Input group-->
+										<!--begin::Input group-->
+										<div class="fv-row mb-10">
+											<!--begin::Label-->
+											<label class="form-label required">Average Tuition Fee</label>
+											<!--end::Label-->
+											<!--begin::Row-->
+											<div class="row">
+												<!--begin::Col-->
+												<div class="col-md-4">
+													<!--begin::Label-->
+													<label class="form-label">Primary</label>
+													<!--end::Label-->
+													<!--begin::Input-->
+													<input type="number" class="form-control form-control-lg form-control-solid" name="tuition_fee_primary" placeholder="Enter fee for Primary" />
+													<!--end::Input-->
+													@error('tuition_fee_primary')
+													<div class="invalid-feedback">{{ $message }}</div>
+													@enderror
+												</div>
+												<!--end::Col-->
+												<!--begin::Col-->
+												<div class="col-md-4">
+													<!--begin::Label-->
+													<label class="form-label">JSS</label>
+													<!--end::Label-->
+													<!--begin::Input-->
+													<input type="number" class="form-control form-control-lg form-control-solid" name="tuition_fee_jss" placeholder="Enter fee for JSS" />
+													<!--end::Input-->
+													@error('tuition_fee_jss')
+													<div class="invalid-feedback">{{ $message }}</div>
+													@enderror
+												</div>
+												<!--end::Col-->
+												<!--begin::Col-->
+												<div class="col-md-4">
+													<!--begin::Label-->
+													<label class="form-label">SSS</label>
+													<!--end::Label-->
+													<!--begin::Input-->
+													<input type="number" class="form-control form-control-lg form-control-solid" name="tuition_fee_sss" placeholder="Enter fee for SSS" />
+													<!--end::Input-->
+													@error('tuition_fee_sss')
+													<div class="invalid-feedback">{{ $message }}</div>
+													@enderror
+												</div>
+												<!--end::Col-->
+											</div>
+											<!--end::Row-->
+										</div>
+										<!--end::Input group-->
+
+										<!--begin::Input group-->
+										<div class="fv-row mb-10">
+											<!--begin::Label-->
+											<label class="form-label required">Admission Period</label>
+											<!--end::Label-->
+											<!--begin::Input group-->
+											<div class="row">
+												<div class="col-md-6">
+													<!--begin::Label-->
+													<label class="form-label">Starting Date</label>
+													<!--end::Label-->
+													<!--begin::Input-->
+													<input type="date" name="admission_start_date" class="form-control form-control-lg form-control-solid" />
+													<!--end::Input-->
+													@error('admission_start_date')
+													<div class="invalid-feedback">{{ $message }}</div>
+													@enderror
+												</div>
+												<div class="col-md-6">
+													<!--begin::Label-->
+													<label class="form-label">Ending Date</label>
+													<!--end::Label-->
+													<!--begin::Input-->
+													<input type="date" name="admission_end_date" class="form-control form-control-lg form-control-solid" />
+													<!--end::Input-->
+													@error('admission_end_date')
+													<div class="invalid-feedback">{{ $message }}</div>
+													@enderror
+												</div>
+											</div>
+											<!--end::Input group-->
 										</div>
 										<!--end::Input group-->
 							
@@ -613,18 +724,18 @@ License: For each use you must have a valid license purchased only from above li
 											<!--begin::Col-->
 											<div class="col-md-4 fv-row">
 												<!--begin::Label-->
-												<label class=" fs-6 fw-semibold form-label mb-2">Country</label>
+												<label class=" fs-6 fw-semibold form-label mb-2">State</label>
 												<!--end::Label-->
 												<!--begin::Select-->
-												<select name="country" class="form-select form-select-solid" data-control="select2" data-placeholder="Select a country" >
+												<select name="state" class="form-select form-select-solid" data-control="select2" data-placeholder="Select a country" >
 													<option></option>
-													<option value="Nigeria">Nigeria</option>
-													<option value="Ghana">Ghana</option>
-													<option value="Benin">Benin</option>
+													<option value="Kano">Nigeria</option>
+													<option value="Jigawa">Ghana</option>
+													<option value="Kaduna">Benin</option>
 													<!-- Add more countries as needed -->
 												</select>
 												<!--end::Select-->
-												@error('country')
+												@error('state')
 												<div class="invalid-feedback">{{ $message }}</div>
 												@enderror
 											</div>
@@ -632,14 +743,14 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Col-->
                                             <div class="col-md-4 fv-row">
                                                 <!--begin::Label-->
-                                                <label class=" fs-6 fw-semibold form-label mb-2">State</label>
+                                                <label class=" fs-6 fw-semibold form-label mb-2">Local Government</label>
                                                 <!--end::Label-->
                                                 <!--begin::Select-->
-                                                <select name="state" class="form-select form-select-solid" data-control="select2" data-placeholder="Select a state" >
+                                                <select name="lga" class="form-select form-select-solid" data-control="select2" data-placeholder="Select a state" >
                                                     <option></option>
-                                                    <option value="Kano">Kano</option>
-                                                    <option value="Jigawa">Jigawa</option>
-                                                    <option value="Yobe">Yobe</option>
+                                                    <option value="Kano">KMC</option>
+                                                    <option value="Jigawa">Gwale</option>
+                                                    <option value="Yobe">Fagge</option>
                                                     <!-- Add more states as needed -->
                                                 </select>
                                                 <!--end::Select-->
@@ -648,18 +759,18 @@ License: For each use you must have a valid license purchased only from above li
                                             <!--begin::Col-->
                                             <div class="col-md-4 fv-row">
                                                 <!--begin::Label-->
-                                                <label class="required fs-6 fw-semibold form-label mb-2">Local Government</label>
+                                                <label class="required fs-6 fw-semibold form-label mb-2">City</label>
                                                 <!--end::Label-->
                                                 <!--begin::Select-->
-                                                <select name="lga" class="form-select form-select-solid" data-control="select2" data-placeholder="Select a local government">
+                                                <select name="city" class="form-select form-select-solid" data-control="select2" data-placeholder="Select a local government">
                                                     <option></option>
-                                                    <option value="Local Government 1">Local Government 1</option>
-                                                    <option value="Local Government 2">Local Government 2</option>
-                                                    <option value="Local Government 3">Local Government 3</option>
-                                                    <!-- Add more local governments as needed -->
+                                                    <option value="Local Government 1">Kabuga</option>
+                                                    <option value="Local Government 2">Dorayi</option>
+                                                    <option value="Local Government 3">Janbulo</option>
+                                                    <!-- Add more local cities as needed -->
                                                 </select>
                                                 <!--end::Select-->
-												@error('lga')
+												@error('city')
         									<div class="invalid-feedback">{{ $message }}</div>
     										@enderror
                                             </div>
